@@ -1,4 +1,4 @@
-name: Build and Push to ECR - Modulo Notificaciones
+name: Build and Push to ECR - Modulo de Notificaciones
 
 on:
   push:
