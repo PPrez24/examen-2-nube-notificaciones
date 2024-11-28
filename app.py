@@ -18,10 +18,14 @@ def enviar_notificacion():
         return jsonify({'error': 'Correo y Mensaje son requeridos'}), 400
 
     try:
+        mensaje = data['mensaje']
+        if data.get('url_pdf'):  # Si se incluye el enlace del PDF
+            mensaje += f"\n\nPuedes descargar tu nota de venta aquí: {data['url_pdf']}"
+
         sns.publish(
             TopicArn=os.getenv("SNS_TOPIC_ARN"),
-            Message=data['mensaje'],
-            Subject="Notificación",
+            Message=mensaje,
+            Subject="Notificación de Nota de Venta",
             MessageStructure='string'
         )
         return jsonify({'mensaje': 'Notificación enviada exitosamente'}), 200
